@@ -20,6 +20,7 @@ public class Test {
 		
 		System.out.println(num1 + " " + num2);
 		input.close();
+		// Added this comment
 	}
 
 }
