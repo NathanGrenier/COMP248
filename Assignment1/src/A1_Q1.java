@@ -37,8 +37,8 @@ public class A1_Q1 {
 		System.out.println("Welcome to the Simple 3D-Space Program:\n");
 		
 		// Math Constants
-		double PI = 22/7d;				// Type cast double (or adding d) ensures that result is a double
-		double E = 2.718281828f;
+		final double PI = 22/7d;				// Type cast double (or adding d) ensures that result is a double
+		final double E = 2.718281828f;
 		
 		// Create new Scanner object
 		Scanner input = new Scanner(System.in);
