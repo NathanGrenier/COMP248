@@ -56,7 +56,9 @@ public class A1_Q2 {
 		System.out.printf("\nThe corresponding temperature in Fahrenheit unit is: %f", new_fahrenheit);	// Fahrenheit
 		
 		// Computing value of x
-		double x = new_fahrenheit % new_celsius;			// PROBLEM WITH TEST CASE #2
+		double x = Math.round(new_fahrenheit) % Math.round(new_celsius);			/* Modulus operator returns the remainder of a division between 2 integers. 
+																					Math.round() converts the new temperatures which are doubles to integers while taking into 
+																					account the value of the decimal. Using type cast would lose accuracy (value would not be rounded)*/
 		
 		// Display value of x
 		System.out.printf("\nThe corresponding value for x is: %f", x);
