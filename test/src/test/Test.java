@@ -4,22 +4,15 @@ import java.util.Scanner;
 public class Test {
 
 	public static void main(String[] args) {
-		/*
-		int mil50 = 50000000;
-		long value = 1000L * mil50;
-
-		double price = 4.35;
-		double quantity = 1000000;
-		double total = price / quantity;
-		*/
-		Scanner input = new Scanner(System.in);
-		System.out.print("Enter your age: ");
-		int num1 = input.nextInt();
-		int num2 = input.nextInt();
-
+		String s = "Your Name Here";
 		
-		System.out.println(num1 + " " + num2);
-		input.close();
+		Scanner scanner = new Scanner(System.in);
+		
+		String value = scanner.next();
+		String value2 = scanner.next();
+		
+		System.out.printf(value + "||" + value2);
+		//System.out.println(str.substring(4));
 		
 	}
 
