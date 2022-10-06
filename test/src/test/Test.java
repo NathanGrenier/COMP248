@@ -4,7 +4,6 @@ import java.util.Scanner;
 public class Test {
 
 	public static void main(String[] args) {
-		String s = "Your Name Here";
 		
 		Scanner scanner = new Scanner(System.in);
 		
@@ -13,7 +12,5 @@ public class Test {
 		
 		System.out.printf(value + "||" + value2);
 		//System.out.println(str.substring(4));
-		
-	}
-
+		}
 }
