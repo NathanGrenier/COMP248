@@ -45,8 +45,8 @@ public class A1_Q1 {
 		
 		// Record input from user after they are prompted
 		System.out.print("Enter integer values for p and q (seperated by a space) ranging from 50-127:");		// Prompt user to input value
-		int p = input.nextInt();												// Store value inputed 
-		int q = input.nextInt();												// Store value inputed 
+		byte p = input.nextByte();												// Store value inputed 
+		byte q = input.nextByte();												// Store value inputed 
 		// Close Scanner object
 		input.close();
 		
@@ -64,7 +64,7 @@ public class A1_Q1 {
 		double z_near = q + (y_near * 6);
 		
 		// Print coordinates of nearest object
-		System.out.printf("The Cartesian coordiantes of the first object is:\n(%f, %f, %f)\n", x_near, y_near, z_near);
+		System.out.printf("The Cartesian coordiantes of the first object is:\n(%f, %f, %f)\n\n", x_near, y_near, z_near);
 		
 		// Termination Message
 		System.out.print("Thank you for your contribution to this Space Project");
