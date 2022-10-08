@@ -48,6 +48,9 @@ public class A2_Q1 {
 		// Store value (Recycling code number) inputed by user
 		int code = in.nextInt();
 		
+		// Close scanner instance
+		in.close();
+		
 		// Check if the inputed code is valid. If true, display its type and the action instructions
 		if(code >= 1 && code <= 5) {																							// Recycled Plastics
 			// Display Type

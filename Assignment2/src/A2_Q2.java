@@ -37,6 +37,9 @@ public class A2_Q2 {
 		String month = in.next();
 		String market = in.next();
 		
+		// Close scanner instance
+		in.close();
+		
 		// Variable corresponding to domestic or international
 		int isDomestic = 0;	// 1: Domestic, 0: International
 		
