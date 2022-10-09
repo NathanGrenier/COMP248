@@ -4,13 +4,20 @@
 // For COMP 248 Section T – Fall 2022
 // October 7, 2022 
 // 
-//Purpose: 
+// Purpose: This program allows the user to input an integer code. 
+// This code is used to display, to the user, 
+// what type of material that code corresponds to and how to dispose of it. 
 // 
 // Variables:
+// code = stores the user inputed code as an integer.
+// in = Scanner object to read user input
 //
-// Constants:
-//
-// Algorithm: 
+// Algorithm: Program prompts the user with a welcome message and a table that shows which 
+// recycling code corresponds to what items. The user is then prompted to enter a code.
+// The inputed code is then evaluated in a series of if statement to determine the right output message to display.
+// If the code is not valid. An error message is sent and the program is terminated.
+// If the code is valid, the type of material and information on how to dispose of it is displayed to the user.
+// The program terminates with a goodbye message.
 // --------------------------------------------------------
 
 import java.util.Scanner;

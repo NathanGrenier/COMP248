@@ -4,13 +4,28 @@
 // For COMP 248 Section T – Fall 2022
 // October 7, 2022 
 // 
-//Purpose: 
-// 
-// Variables:
+// Purpose: This program calculates the price index for the retail price of farm goods 
+// using 2 values inputed by the user, the current month and if the goods will be distributed internationally or domestically.
+// This retail price is then displayed to the user.
 //
+// Variables: 
+// dobule P = percentage of the harvest | Used in calculating the price index "I"
+// int isDomestic = either a 0 or 1. 1 means isDomestic is true, 0 means it is international. Used in later switch statements
+// double I = Price index calculated using P, W and (1/20).
+// Scanner in = Scanner instance to read user input
 // Constants:
+// dobule W = 1.4267 | Just a value used in calculating I
 //
-// Algorithm: 
+// Algorithm: Program displays a welcome message and prompts the user to input the current 
+// month and if the goods will be shipped domestically or internationally.
+// Switch statement is used to assign a value to isDomestic. 
+// If the input is invalid, an error message is displayed and the program is terminated.
+// Another case insensitive (using toLowerCase() on the variable) switch statement is used to determine what month was inputed.
+// Nested inside each case, another switch statement checks what the value of isDomestic is. 
+// Depending on this value, a value is assigned to P. 
+// If the month value inputed by the user is invalid, the default case in the switch statement displays an error message and terminates the program.
+// The Price index "I" is calculated using P,W and other constants.
+// The price index is displayed to the user and the program terminates with a thank you message.
 // --------------------------------------------------------
 
 import java.util.Scanner;
@@ -54,6 +69,7 @@ public class A2_Q2 {
 				isDomestic = 0;
 				break;
 			default:
+				// Display Error message
 				System.out.print("Error: An invalid value has been entered for the 'Market' varaible. Please try again!");
 				// Terminate program
 				System.exit(0);
@@ -67,13 +83,13 @@ public class A2_Q2 {
 					// 1 equivalent to true for isDomestic
 					case 1:
 						P = 75.25;
-						break;
+						break;			// stops the other case from being evaluated if isDomestic = true.
 					// 0 equivalent to false for isDomestic
 					case 0:
 						P = 24.75;
 						break;
 				}
-				break;
+				break;					// stops the other cases from being evaluated if the month = "january".
 			
 			case "febuary":
 				switch (isDomestic) {
@@ -197,6 +213,7 @@ public class A2_Q2 {
 				break;
 			
 			default:
+				// Display error message
 				System.out.println("\"Error: An invalid value has been entered for the 'Month' varaible. Please try again!\"");
 				// Terminate Program
 				System.exit(0);	
