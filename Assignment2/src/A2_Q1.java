@@ -52,8 +52,15 @@ public class A2_Q1 {
 		// Initialize a scanner
 		Scanner in = new Scanner(System.in);
 		
+		byte code = 0;		// stores recycling code entered by user
+		
 		// Store value (Recycling code number) inputed by user
-		int code = in.nextInt();
+		if (in.hasNextByte()) {			// Validate if user is entering a byte value
+			code = in.nextByte();		// Assign byte value to code
+		} else {
+			System.out.print("Error: Your recycling Code is not a valid integer between -128 to 127. Kindly retry again!");
+			System.exit(0); 		// Terminate code as user has entered a non-byte value 
+		}
 		
 		// Close scanner instance
 		in.close();
