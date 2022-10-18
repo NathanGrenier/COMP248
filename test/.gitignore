@@ -1,1 +1,3 @@
 /bin/
+# Ignore test file.
+Test.java
