@@ -51,9 +51,9 @@ public class A3_Q2 {
 				data[i][k] = "0";
 			}
 			
-			// Remove trailing whitespaces with .trim on each element of nested array
+			// Remove trailing whitespaces with .trim() and convert each element of nested array to uppercase
 			for (int j=0; j<4; j++) {
-				data[i][j] = data[i][j].trim();
+				data[i][j] = data[i][j].trim().toUpperCase();
 			}
 		}
 				
@@ -165,9 +165,9 @@ public class A3_Q2 {
 							data[i][k] = "0";
 						}
 						
-						// Remove trailing whitespaces with .trim on each element of nested array
+						// Remove trailing whitespaces with .trim() and convert each element of nested array to uppercase
 						for (int k=0; k<4; k++) {
-							data[i][k] = data[i][k].trim();
+							data[i][k] = data[i][k].trim().toUpperCase();
 						}
 					}
 					break;
