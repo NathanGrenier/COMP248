@@ -36,6 +36,8 @@ public class A3_Q1 {
 			// Close Scanner
 			in.close();
 			
+			// Note: you can also use String.trim() to remove the white spaces
+			
 			// While there are whitespaces at the start or end of message, remove them until they are all gone
 			while (message.indexOf(" ") == 0 || message.lastIndexOf(" ") == message.length() -1) {
 				// If the whitespace is at the start, remove it
