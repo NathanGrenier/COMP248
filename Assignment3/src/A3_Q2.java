@@ -11,7 +11,6 @@
 // Algorithm: 
 // --------------------------------------------------------
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class A3_Q2 {
@@ -34,27 +33,50 @@ public class A3_Q2 {
 		String candidates[] = in.nextLine().split(";");		// .split(";") returns an array of Strings for each value separated  by the semicolon. 
 															// Format: [11, Jane Doe, 12, John Doe] 
 		
-		// Initialize 2D array that will hold the data
+		// Initialize 2D array that will hold the data. dataAppended is a temp variable that is used to add an empty array to data
 		String data[][] = new String[0][4];		// Format: {{id_1, name_1, votes_1, position_1}, {id_2, name_2, votes_2, position_2}}
+		String dataAppended[][];
 		
 		// Insert values from candidates[] into data[i][]
 		for (int i=data.length; i < candidates.length; i++) {
 			// Add new array to data for next candidate
-			data = Arrays.copyOf(data, data.length + 1);
+			
+			dataAppended = new String[data.length + 1][4];	// new variables dataAppended needed because we can't use methods. temp variable
+			// Copy content of data to dataAppended
+			for (int j=0; j < data.length; j++) {
+				for (int k=0; k <data[j].length; k++) {
+					dataAppended[j][k] = data[j][k];
+				}
+			}
+			// Set value of data to dataAppended. Meaning an empty array was added to data
+			data = dataAppended;
+			
 			
 			// Assign values of each candidate to first array of data
 			data[i] = candidates[i].split(",");
 			
 			// Assign 0 for number of votes and position in data[i]. This is necessary because when assigning values to data[i], .split(",") returns an array with only 2 elements. We have to make it 4 to include votes and position
 			for (int k=2; k < 4; k++) {
-				data[i] = Arrays.copyOf(data[i], data[i].length + 1);
-				data[i][k] = "0";
+				dataAppended = new String[data.length][4];	// new variables dataAppended needed because we can't use methods. temp variable
+				// Copy content of data to dataAppended
+				for (int j=0; j < data.length; j++) {
+					for (int n=0; n < data[j].length; n++) {
+						dataAppended[j][n] = data[j][n];
+					}
+				}
+				
+				dataAppended[i][k] = "0";
+				
+				// Set value of data to dataAppended. Meaning an empty array was added to data
+				data = dataAppended;
+				
 			}
 			
 			// Remove trailing whitespaces with .trim() and convert each element of nested array to uppercase
 			for (int j=0; j<4; j++) {
 				data[i][j] = data[i][j].trim().toUpperCase();
 			}
+			
 		}
 				
 		// Display Code options
@@ -153,16 +175,36 @@ public class A3_Q2 {
 					
 					// Insert values from newCandidates[] into data[][]
 					for (int i=data.length, j=0; i < (dataLengthInit + newCandidates.length); i++, j++) {
+						
 						// Add new array to data for next candidate
-						data = Arrays.copyOf(data, data.length + 1);
+						
+						dataAppended = new String[data.length + 1][4];	// new variables dataAppended needed because we can't use methods. temp variable
+						// Copy content of data to dataAppended
+						for (int n=0; n < data.length; n++) {
+							for (int k=0; k <data[n].length; k++) {
+								dataAppended[n][k] = data[n][k];
+							}
+						}
+						// Set value of data to dataAppended. Meaning an empty array was added to data
+						data = dataAppended;
 						
 						// Assign values of each candidate to first array of data
 						data[i] = newCandidates[j].split(",");
 						
 						// Assign 0 for number of votes and position in data[i]. This is necessary because when assigning values to data[i], .split(",") returns an array with only 2 elements. We have to make it 4 to include votes and position
 						for (int k=2; k < 4; k++) {
-							data[i] = Arrays.copyOf(data[i], data[i].length + 1);
-							data[i][k] = "0";
+							dataAppended = new String[data.length][4];	// new variables dataAppended needed because we can't use methods. temp variable
+							// Copy content of data to dataAppended
+							for (int m=0; m < data.length; m++) {
+								for (int n=0; n < data[m].length; n++) {
+									dataAppended[m][n] = data[m][n];
+								}
+							}
+							
+							dataAppended[i][k] = "0";
+							
+							// Set value of data to dataAppended. Meaning an empty array was added to data
+							data = dataAppended;
 						}
 						
 						// Remove trailing whitespaces with .trim() and convert each element of nested array to uppercase
@@ -173,7 +215,7 @@ public class A3_Q2 {
 					break;
 				
 				
-				// ---Display results---	
+				// ---Display election results---	
 				case 4:	
 					// ----- Compute Position of Candidates ----- //
 					
@@ -202,13 +244,25 @@ public class A3_Q2 {
 						
 						// Check if there are any other candidates with votes equal to the candidate with the most votes
 						for (String candidate[]: tempData) {
-							// If the candidate we are isn't the same as the one in mostVotes
+							// If the current candidate isn't the same as the one in mostVotes
 							if (candidate[0] != mostVotes[0][0]) {
 								// If the candidate we are checking and the first candidate in mostVotes have the same number of votes
 								if (Integer.parseInt(candidate[2]) == Integer.parseInt(mostVotes[0][2])) {
 									// There are more than 1 candidates with the most votes. Add the candidates to the mostVotes array
-									mostVotes = Arrays.copyOf(mostVotes, mostVotes.length + 1);		// Increase length of mostVotes by 1 for new candidate
-									mostVotes[mostVotes.length - 1] = candidate.clone();			// Copy the data of the candidate into mostVotes
+									
+									// Add 1 nested array to the temp variable dataAppended
+									dataAppended = new String[mostVotes.length + 1][4];
+									// Copy contents of mostVotes into dataAppended
+									for (int i=0; i < mostVotes.length; i++) {
+										for (int j=0; j < mostVotes[i].length; j++) {
+											dataAppended[i][j] = mostVotes[i][j];
+										}
+									}
+									// Add contents of current mostVotes candidate to dataAppended
+									dataAppended[dataAppended.length - 1] = candidate.clone();
+									
+									// Copy dataAppended into mostVotes
+									mostVotes = dataAppended;
 								}							
 							}
 						}
@@ -225,19 +279,37 @@ public class A3_Q2 {
 									k++;
 								}
 							}
-							tempData = Arrays.copyOf(newTempData, newTempData.length);
+							// Copy newTempData into tempData. This copy will exclude the elements removed
+							tempData = new String[newTempData.length][4];		// Create tempData array with the same size as newTempData
+							// Copy elements from newTempData into tempData
+							for (int i=0; i < newTempData.length; i++) {
+								for (int j=0; j < newTempData[i].length; j++) {
+									tempData[i][j] = newTempData[i][j];
+								}
+							}
 						}
 							 
 						
-						// Assign positions value to candidates with the most votes 
+						// Assign current positions value to candidates with the most votes 
 						for (String candidate[]: mostVotes) {
 							candidate[3] = Integer.toString(pos);
 						}
 						
 						// Add candidates with updated position values to newData
 						for (String candidate[]: mostVotes) {
-							newData = Arrays.copyOf(newData, newData.length + 1);
-							newData[newData.length - 1] = candidate.clone();
+							// Add 1 nested array to the temp variable dataAppended
+							dataAppended = new String[newData.length + 1][4];
+							// Copy contents of newData into dataAppended
+							for (int i=0; i < newData.length; i++) {
+								for (int j=0; j < newData[i].length; j++) {
+									dataAppended[i][j] = newData[i][j];
+								}
+							}
+							// Add contents of current mostVotes candidate to dataAppended
+							dataAppended[dataAppended.length - 1] = candidate.clone();
+							
+							// Copy dataAppended into newData
+							newData = dataAppended;
 						}
 					
 						pos++;		// Increment position value
@@ -260,7 +332,6 @@ public class A3_Q2 {
 					// Print tail
 					System.out.println("***********************************************************");
 					break;
-					
 					
 				// ---Terminate Program---	
 				case 0:		
