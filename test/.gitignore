@@ -1,4 +1,4 @@
 /bin/
-# Ignore all files in test folder except the gitignore.
-*
+# Ignore all files and subfolders in test folder except the gitignore.
+*/
 !.gitignore
