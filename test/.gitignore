@@ -1,3 +1,4 @@
 /bin/
-# Ignore test file.
-Test.java
+# Ignore all files in test folder except the gitignore.
+*
+!.gitignore
