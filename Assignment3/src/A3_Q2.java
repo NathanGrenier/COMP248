@@ -145,7 +145,7 @@ public class A3_Q2 {
 									// Add a vote
 									candidate[2] = Integer.toString(Integer.parseInt(candidate[2]) + 1); 	// parse candidate[2] for an int. add 1 to that int. Convert the int back to a string
 									voted = true;
-									System.out.printf("Your ballot has been successfully caster for: %s bearing Candidate ID: %s\n\n", candidate[1], candidate[0]);
+									System.out.printf("Your ballot has been successfully casted for: %s bearing Candidate ID: %s\n\n", candidate[1], candidate[0]);
 								}
 							}
 							
