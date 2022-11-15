@@ -1,15 +1,17 @@
-// -------------------------------------------------------
-// Assignment 3
-// Written by: Nathan Grenier 40250986
-// For COMP 248 Section T – Fall 2022
-// October 24, 2022 
-// 
-// Purpose:
-// 
-// Variables:
-//
-// Algorithm: 
-// --------------------------------------------------------
+/*
+* Assignment 3
+* Written by: Nathan Grenier 40250986
+* For COMP 248 Section T – Fall 2022
+* October 24, 2022 
+* 
+* Purpose: This program is a simple electronic voting system (SEVS). It has 4 main functions:
+* 1. Display candidates
+* 2. Vote for a candidate
+* 3. Add new candidates
+* 4. Calculate and display election results
+* The program can handle invalid inputs by the user and can be terminates by entering the code 0.
+* To input a candidate, enter their information in the following format: {id_1}, {name_1}; {id_2}, {name_2};......
+*/
 
 import java.util.Scanner;
 
@@ -30,7 +32,7 @@ public class A3_Q2 {
 		
 //----- Format user input into String array -----//
 		// Store user input
-		String candidates[] = in.nextLine().split(";");		// .split(";") returns an array of Strings for each value separated  by the semicolon. 
+		String candidates[] = in.nextLine().split(";");		// .split(";") returns an array of Strings for each value separated by the semicolon. 
 															// Format: [11, Jane Doe, 12, John Doe] 
 		
 		// Initialize 2D array that will hold the data. dataAppended is a temp variable that is used to add an empty array to data
@@ -40,15 +42,15 @@ public class A3_Q2 {
 		// Insert values from candidates[] into data[i][]
 		for (int i=data.length; i < candidates.length; i++) {
 			// Add new array to data for next candidate
-			
 			dataAppended = new String[data.length + 1][4];	// new variables dataAppended needed because we can't use methods. temp variable
+			
 			// Copy content of data to dataAppended
 			for (int j=0; j < data.length; j++) {
 				for (int k=0; k <data[j].length; k++) {
 					dataAppended[j][k] = data[j][k];
 				}
 			}
-			// Set value of data to dataAppended. Meaning an empty array was added to data
+			// Set value of data to dataAppended. We have successfully added an empty array to data.
 			data = dataAppended;
 			
 			
@@ -65,9 +67,10 @@ public class A3_Q2 {
 					}
 				}
 				
+				// Add value of 0 to index k of candidate. makes the position and number of votes 0
 				dataAppended[i][k] = "0";
 				
-				// Set value of data to dataAppended. Meaning an empty array was added to data
+				// Set value of data to dataAppended.
 				data = dataAppended;
 				
 			}
@@ -108,6 +111,7 @@ public class A3_Q2 {
 			
 			// Evaluate the code that was inputed
 			switch (code) {
+				
 				// ---Display candidates---	
 				case 1: 	
 					// Print header
@@ -136,7 +140,9 @@ public class A3_Q2 {
 						// Prompt user to vote for a candidate
 						System.out.print("\nPlease enter the ID of the candidate you wish to vote for: ");
 						
+						// If the user has entered an integer value (valid values are integers)
 						if (in.hasNextInt()) {
+							// Assign candidate id to vote
 							int vote = in.nextInt();
 							
 							// Check if ID entered exists
@@ -167,28 +173,27 @@ public class A3_Q2 {
 					// Clear i/o stream
 					in.nextLine();
 					// Store user input
-					String newCandidates[] = in.nextLine().split(";");		// .split(";") returns an array of Strings for each value separated by the semicolon. 
+					String newCandidates[] = in.nextLine().split(";");	// .split(";") returns an array of Strings for each value separated by the semicolon. 
 																		// Format: [11, Jane Doe, 12, John Doe] 
-					
+
 					// Keep track of initial length of data array
 					int dataLengthInit = data.length;
 					
 					// Insert values from newCandidates[] into data[][]
 					for (int i=data.length, j=0; i < (dataLengthInit + newCandidates.length); i++, j++) {
-						
 						// Add new array to data for next candidate
-						
 						dataAppended = new String[data.length + 1][4];	// new variables dataAppended needed because we can't use methods. temp variable
+						
 						// Copy content of data to dataAppended
 						for (int n=0; n < data.length; n++) {
 							for (int k=0; k <data[n].length; k++) {
 								dataAppended[n][k] = data[n][k];
 							}
 						}
-						// Set value of data to dataAppended. Meaning an empty array was added to data
+						// Set value of data to dataAppended. We have successfully added an empty array to data.
 						data = dataAppended;
 						
-						// Assign values of each candidate to first array of data
+						// Assign values of each candidate to current array of data
 						data[i] = newCandidates[j].split(",");
 						
 						// Assign 0 for number of votes and position in data[i]. This is necessary because when assigning values to data[i], .split(",") returns an array with only 2 elements. We have to make it 4 to include votes and position
@@ -201,9 +206,10 @@ public class A3_Q2 {
 								}
 							}
 							
+							// Add value of 0 to index k of candidate. makes the position and number of votes 0
 							dataAppended[i][k] = "0";
 							
-							// Set value of data to dataAppended. Meaning an empty array was added to data
+							// Set value of data to dataAppended
 							data = dataAppended;
 						}
 						
@@ -218,10 +224,21 @@ public class A3_Q2 {
 				// ---Display election results---	
 				case 4:	
 					// ----- Compute Position of Candidates ----- //
+					/* Algorithm:
+					 * 1. Create necessary variables
+					 * 2. Copy all candidates to an identical array called tempData 
+					 * 3. Find candidate with the most votes. Add them to mostVotes
+					 * 4. Verify if there are any other candidate with votes equal to the candidate with the most votes. Add those candidate to most votes as well
+					 * 5. Delete candidates with most votes from tempData
+					 * 6. Assign current position value to candidates in mostVotes
+					 * 7. Copy candidates from mostVotes into a new array called newData. newData will contain the sorted candidate data with updated position values.
+					 * 8. Increment the position value
+					 * 9. Repeat until there are no more candidates in tempData
+					 */
 					
 					// Create new variables. 
 					String tempData[][] = new String[data.length][];	// contains a copy of the data array. After looping through each candidate, an entry in tempData will be deleted.
-					String newData[][] = new String[0][];				// contains the candidates with updated position data
+					String newData[][] = new String[0][];				// contains the sorted candidates with updated position data
 					int pos = 1;										// contains the current position being assigned to the candidates
 					
 					// Copy data array into tempData
@@ -230,14 +247,15 @@ public class A3_Q2 {
 					}
 					
 					
+					// While there is still a candidate to evaluate
 					while (tempData.length != 0) {
-					
 						String mostVotes[][] = new String[1][];		// Holds the candidate with the most votes
 						mostVotes[0] = tempData[0].clone();			// We don't know which candidate has the most votes. Just copy the first candidate in tempData
 						
 						// Loop through tempData and find the candidate with the most votes
 						for (String candidate[]: tempData) {
 							if (Integer.parseInt(candidate[2]) > Integer.parseInt(mostVotes[0][2])) {
+								// Assign current candidate to first index of mostVotes
 								mostVotes[0] = candidate.clone();
 							}
 						}
@@ -349,6 +367,7 @@ public class A3_Q2 {
 					break;
 			}
 		}
+		// Run until user enters the code 0
 		while (code != 0);
 	}
 

@@ -1,15 +1,13 @@
-// -------------------------------------------------------
-// Assignment 3
-// Written by: Nathan Grenier 40250986
-// For COMP 248 Section T – Fall 2022
-// October 24, 2022 
-// 
-// Purpose:
-// 
-// Variables:
-//
-// Algorithm: 
-// --------------------------------------------------------
+/*
+* Assignment 3
+* Written by: Nathan Grenier 40250986
+* For COMP 248 Section T – Fall 2022
+* October 24, 2022 
+*  
+* Purpose: This program allows users from the ground station to send encrypted messages to individuals in space.
+* It also allows for the decryption of messages that the user may recieve. The program first processes the message to ensure that the 
+* first and last characters are not spaces. It then evaluates the length of the message to determine the type of encryption/decryption.
+*/
 
 import java.util.Scanner;
 
@@ -42,9 +40,9 @@ public class A3_Q1 {
 			while (message.indexOf(" ") == 0 || message.lastIndexOf(" ") == message.length() -1) {
 				// If the whitespace is at the start, remove it
 				if (message.indexOf(" ") == 0) {
-					message = message.substring(1, message.length());	// Removes first character of string by creating a new one using substring
+					message = message.substring(1, message.length());	// Removes first character of string by creating a new string without the space using substring
 				} else {	// if else, whitespace is at the end, remove it
-					message = message.substring(0, message.length() - 1);	// Removes last character of a string by creating a new one
+					message = message.substring(0, message.length() - 1);	// Removes last character of a string by creating a new string without the space
 				}
 			}
 		}
@@ -54,7 +52,15 @@ public class A3_Q1 {
 		
 		// Verify if message has an even or odd number of characters
 		if (message.length() % 2 == 0) {
-			// If even, apply even cipher algorithm
+			/* Even Cipher Algorithm:
+			 * 1. Start from the first character in the string
+			 * 2. Get the character at the even and odd index (0 is considered to be even)
+			 * 3. Concatenate the odd character to the output variable ciphertext first, then the even character
+			 * 4. Increase the index of the current evaluated character by 2
+			 * 5. Repeat until you reach the second last character in the string
+			 */
+			
+			// Apply the even cipher algorithm
 			for (int i = 0; i < message.length() - 1; i += 2) {
 				// Get char at even and odd index
 				char evenChar = message.charAt(i);
@@ -67,10 +73,20 @@ public class A3_Q1 {
 			}
 			
 		} else {
+			/* Odd Cipher Algorithm:
+			 * 1. Add the first character in the input string to the output string ciphertext. 
+			 *    Since the string has an odd number of characters, we must skip the first one for the algorithm to work
+			 * 2. Start from the second character in the string
+			 * 3. Get the character at the odd and even index
+			 * 4. Concatenate the even character to the output variable ciphertext first, then the odd character
+			 * 5. Increase the index of the current evaluated character by 2
+			 * 6. Repeat until you reach the second last character in the string
+			 */
+			// Apply odd cipher algorithm
+			
 			// Add char at index 0 to ciphertext (it should not be altered)
 			ciphertext += message.charAt(0);
 			
-			// If odd, apply odd cipher algorithm
 			for (int i = 1; i < message.length() - 1; i += 2) {
 				// Get char at even and odd index
 				char oddChar = message.charAt(i);
