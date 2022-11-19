@@ -10,8 +10,18 @@
 public class BudgetDemo {
 
 	public static void main(String[] args) {
+		Fund house1 = new Fund();
+		Fund house2 = new Fund(1,2,3,4,5);
+		Fund house3 = new Fund(house2);
 		
-		System.out.print("this");
+		System.out.println(house1.toString());
+		System.out.println(house2.toString());
+		System.out.println(house3.toString());
+		
+		//house2.setBill_10(2);
+		System.out.println(house2.getBill_10());
+		System.out.println(Fund.equals(house2, house2));
+		
 	}
 
 }
