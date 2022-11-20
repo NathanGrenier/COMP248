@@ -6,7 +6,7 @@ import java.util.Arrays;
 * For COMP 248 Section T – Fall 2022
 * November 17, 2022 
 *  
-* Purpose:
+* Purpose:	TODO: Remove import java.util.Arrays
 */
 
 public class HouseholdBudget {
