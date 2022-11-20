@@ -4,7 +4,7 @@
 * For COMP 248 Section T – Fall 2022
 * November 17, 2022 
 *  
-* Purpose: The Fund class manages the funds in a household object. 
+* Purpose: The Fund class can create an object corresponding to the funds in a householdBudget.
 * It has attributes for:
 * - Count of fund types
 * - Constant value of each fund type
@@ -65,7 +65,7 @@ public class Fund {
 		this.bill_20 = fundObj.bill_20;
 	}
 	
-	// Methods //
+	// -----Methods----- //
 	// Adds specified money amount to each current fund money amounts
 	public void addFund(int loonies, int toonies, int bill_5, int bill_10, int bill_20) {
 		this.loonies += loonies;
