@@ -1,13 +1,34 @@
-import java.util.Arrays;
-
 /*
 * Assignment 4
 * Written by: Nathan Grenier 40250986
 * For COMP 248 Section T – Fall 2022
 * November 17, 2022 
 *  
-* Purpose:	TODO: Remove import java.util.Arrays
-*/
+* Purpose: Create HouseholdBudget objects. 
+* Each budget has these attributes:
+* - 1 Fund object named fund
+* - An array of Expense objects named expenses
+* 
+* It contains 2 different constructors:
+* 1. Default Constructor: Creates a default Fund object (using the Fund class' default constructor)
+* and an Expenses array with a reference of null.
+* 2. 2 Parameter Constructor: Sets the this.fund attribute to the passed Fund object. 
+* Sets the this.expense Expense array attribute to the passed Expense array. 
+* If the passed Expense array has a reference of null, this.expenses' reference is set to null.
+* 
+* HouseholdBudget contains the following methods:
+* - equalFunds(): Static method that returns true if the total value of 2 HouseholdBudget funds are equal
+* - equalFundType(): Static method that returns true if 2 HouseholdBudget objects have the same number of each fund type
+* - totalFundValue(): Returns the total value (in dollars) of a HouseholdBudget object's fund
+* - expenseCount(): Returns the number of expenses (int) in a HouseholdBudget
+* - addExpense(): Adds a new expense to the HouseholdBudget object. Returns the number of expenses (int).
+* - removeExpense(): Removes an expense from the HouseholdBudget at the specified index. Returns true if the expense was successfully removed.
+* - updateDueDate(): Updates the due day and month of a specified expense.
+* - addFund(): Adds a fund to the HouseholdBudget. Returns the new total value of the HouseholdBudget's fund
+* - equals(): Returns true if the total value of fund and the number of expenses of two HouseholdBudget objects are equal
+* - toString(): Returns a string containing the number of each money type (Fund) and the details of each expense of HouseholdBudget
+* - getFund(): Returns a string containing the breakdown of the HouseholdBudget's fund types
+*/ 
 
 public class HouseholdBudget {
 	// Private Variables
