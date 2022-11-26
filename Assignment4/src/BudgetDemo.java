@@ -46,7 +46,7 @@ public class BudgetDemo {
 		HouseholdBudget budget1 = new HouseholdBudget(fund3, expenses);
 		HouseholdBudget budget2 = new HouseholdBudget(fund3, expenses);
 		
-		System.out.println(HouseholdBudget.equal(budget1, budget2));
+		System.out.println(HouseholdBudget.equals(budget1, budget2));
 		
 		System.out.println(budget1.addExpense(expense2));
 		

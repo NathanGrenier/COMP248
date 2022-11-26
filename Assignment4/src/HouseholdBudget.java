@@ -168,7 +168,7 @@ public class HouseholdBudget {
 	}
 	
 	// Returns true if the total value of fund and the number of expenses of two HouseholdBudget objects are equal
-	public static boolean equal(HouseholdBudget obj1, HouseholdBudget obj2) {
+	public static boolean equals(HouseholdBudget obj1, HouseholdBudget obj2) {
 		if (HouseholdBudget.equalFunds(obj1, obj2) && (obj1.expenseCount() == obj2.expenseCount())) {
 			return true;
 		}
