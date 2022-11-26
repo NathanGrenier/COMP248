@@ -30,7 +30,7 @@ public class BudgetDemo {
 		Expense expense1 = new Expense();
 		Expense expense2 = new Expense("Payment", 12.95, "Videotron", "12/05");
 		Expense expense3 = new Expense(expense2);
-		Expense expenses[] = null;
+		Expense expenses[] = {expense1};
 		
 		/*
 		System.out.println(expense1.toString());
@@ -43,9 +43,26 @@ public class BudgetDemo {
 		System.out.println(Expense.equals(expense1, expense1));
 		*/
 		
-		HouseholdBudget budget1 = new HouseholdBudget(fund2, expenses);
+		HouseholdBudget budget1 = new HouseholdBudget(fund3, expenses);
 		HouseholdBudget budget2 = new HouseholdBudget(fund3, expenses);
-		System.out.println(HouseholdBudget.equalFunds(budget1, budget2));
+		
+		System.out.println(HouseholdBudget.equal(budget1, budget2));
+		
+		System.out.println(budget1.addExpense(expense2));
+		
+		System.out.println(budget1.addExpense(expense3));
+		
+		System.out.println(budget1.getExpenses());
+		
+		System.out.println(budget1.removeExpense(3));
+		
+		System.out.println(budget1.getExpenses());
+		
+		budget1.updateDueDate(0, "11/11");
+		
+		System.out.println(budget1.getExpenses());
+		
+		
 
 		
 	}

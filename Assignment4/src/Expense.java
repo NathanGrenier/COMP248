@@ -21,6 +21,8 @@
 * Along side these are other methods:
 * - toString(): Returns a string containing formated information about the expense. Extra formatting for dueDate and dueMonth. 
 * - equals(): Returns true if the attribute values of 2 expense objects are the same.
+*
+* Note: The dueDate array has the following format: dueDate = {dueDay, dueMonth}
 */
 
 public class Expense {
