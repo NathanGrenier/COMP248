@@ -176,7 +176,7 @@ public class HouseholdBudget {
 		return false;
 	}
 	
-	// TODO: Add last methods
+	// TODO: Add toString() and fundBreakdown() methods. Add comments and test
 	
 	
 	// Getters
