@@ -176,19 +176,27 @@ public class HouseholdBudget {
 		return false;
 	}
 	
-	// TODO: Add toString() and fundBreakdown() methods. Add comments and test
-	
-	
-	// Getters
-	public Fund getFund() {
-		return this.fund;
+	// Returns a string containing the number of each money type (Fund) and the details of each expense of HouseholdBudget
+	public String toString() {
+		String output = "";
+		// Concatenate fund to output
+		output += this.fund.toString();
+		
+		// Concatenate Expenses to output
+		if (this.expenses == null) {
+			output += "\nNo expenses";
+		} else {
+			for (int i=0; i<this.expenseCount(); i++) {
+				output += "\n";		// Add return
+				output += this.expenses[i].toString();	// Add expense[i]
+			}
+		}
+		return output;
 	}
 	
-	// NOT FINISHED
-	public Expense[] getExpenses() {
-		System.out.println(Arrays.toString(this.expenses));
-		return this.expenses;
-		
+	// Returns a string containing the breakdown of a fund of a HouseholdBudget
+	public String getFund() {
+		return this.fund.toString();
 	}
 	
 }
