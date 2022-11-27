@@ -129,16 +129,10 @@ public class BudgetDemo {
 					break;
 					
 				default:
-					System.out.println(code);
 					break;
 			
 			}
 		
 		} while (code !=0);
-		
-		
-
-		
 	}
-
 }
