@@ -11,8 +11,8 @@ import java.util.Scanner;
 public class BudgetDemo {
 	
 	// Returns true if the reference of the array budgets is not equal to null
-	private static boolean budgetExists(HouseholdBudget budgets[]) {
-		if (budgets != null) {
+	private static boolean budgetExists(HouseholdBudget budgetList[]) {
+		if (budgetList != null) {
 			return true;
 		}
 		return false;
@@ -88,7 +88,7 @@ public class BudgetDemo {
 		// --Main-- //
 		// Variables
 		int code;	// Code that determines action to take
-		HouseholdBudget budgets[] = {budget1, budget2, budget3, budget4, budget5};	// Array of HouseholdBudgets
+		HouseholdBudget budgetList[] = {budget1, budget2, budget3, budget4, budget5};	// Array of HouseholdBudgets
 		
 		// Welcome User
 		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n"
@@ -107,14 +107,14 @@ public class BudgetDemo {
 				// ---Display fund and expenses of every HouseholdBudget---
 				case 1:
 					// Check to see if there are any budgets
-					if (budgetExists(budgets)) {
+					if (budgetExists(budgetList)) {
 						System.out.println("Content of each HouseholdBudget:\n"
 								+ "--------------------");
 						
 						// Display HouseholdBudgets
-						for (int i=0; i<budgets.length; i++) {
+						for (int i=0; i<budgetList.length; i++) {
 							System.out.println("HouseholdBudget #"+ i +":");
-							System.out.println(budgets[i].toString() + "\n");
+							System.out.println(budgetList[i].toString() + "\n");
 						}	
 					} else {
 						System.out.println("No budgets exist\n");
