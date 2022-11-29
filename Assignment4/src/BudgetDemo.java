@@ -61,6 +61,76 @@ public class BudgetDemo {
 		return code;
 	}
 	
+	// Prompts the user for an index corresponding to the HouseholdBudget they want to select. Returns the index (int)
+	private static int selectBudget(HouseholdBudget[] list, String prompt) {
+		Scanner in = new Scanner(System.in);
+		int index = -1;		// -1 is the sentinel value
+		
+		// Edge case. If HouseholdBudget[] array is null
+		if (list == null) {
+			System.out.println("There are no HouseholdBudgets");
+			return -1;
+		}
+		
+		// Prompt user
+		System.out.print(prompt);
+		// Display available indexes to choose from
+		System.out.printf(" (Enter number from 0 to %d): ", (list.length - 1));
+		
+		// Validate user input
+		if (in.hasNextInt()) {
+			index = in.nextInt();
+			
+			// The inputed code is not between 0 and the length of the array list -1
+			if (!(index >= 0 && index < list.length)) {
+				System.out.printf("Index must be between 0 and %d. Try Again.", (list.length - 1));
+				// User entered an invalid code, re-prompt them
+				index = selectBudget(list, "");		// Pass empty string as user does not need to see the prompt message again
+			}
+		
+		} else {
+			System.out.printf("Input must be an integer between 0 and %d. Try Again.", (list.length - 1));
+			// User entered an invalid code (not of type int), re-prompt them
+			index = selectBudget(list, "");		// Pass empty string as user does not need to see the prompt message again
+		}
+		return index;
+	}
+	
+	// Prompts user for index of Expense they want to modify. Returns index
+	private static int selectExpense(HouseholdBudget budget, String prompt) {
+		Scanner in = new Scanner(System.in);
+		int index = -1;		// -1 is the sentinel value
+		
+		// Edge case. If Expense[] array is null
+		if (budget.expenseCount() == 0) {
+			System.out.println("Sorry that HouseholdBudget has no expenses\n");
+			return -1;
+		}
+		
+		// Prompt user
+		System.out.print(prompt);
+		// Display available indexes to choose from
+		System.out.printf(" (Enter number from 0 to %d): ", (budget.expenseCount() - 1));
+		
+		// Validate user input
+		if (in.hasNextInt()) {
+			index = in.nextInt();
+			
+			// The inputed code is not between 0 and the length of the expense array -1
+			if (!(index >= 0 && index < budget.expenseCount())) {
+				System.out.printf("Index must be between 0 and %d. Try Again.", (budget.expenseCount() - 1));
+				// User entered an invalid code, re-prompt them
+				index = selectExpense(budget, "");	// Pass empty string as user does not need to see the prompt message again
+			}
+		} else {
+			System.out.printf("Input must be an integer between 0 and %d. Try Again.", (budget.expenseCount() - 1));
+			// User entered an invalid code (not of type int), re-prompt them
+			index = selectExpense(budget, "");	// Pass empty string as user does not need to see the prompt message again
+		}
+		return index;
+	}
+	
+	
 	public static void main(String[] args) {
 		// --Generate Boilerplate Budgets-- //
 		// Funds
@@ -100,6 +170,7 @@ public class BudgetDemo {
 		do {
 			showOptions();			// Prints the option list to the console
 			code = promptUser();	// Prompt the user for a code
+			
 			
 			// Evaluate the code that was inputed
 			switch (code) {
