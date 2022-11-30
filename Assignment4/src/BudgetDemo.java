@@ -4,6 +4,28 @@
 * For COMP 248 Section T – Fall 2022
 * November 17, 2022 
 *  
+* Purpose: Driver code for HouseholdBudgets.
+* The driver has a few static methods for interacting with the user: 
+* - showOptions(): Prints the available commands to the console
+* - promptUser(): Prompts the user for a code. Validates the code. Returns the code (int)
+* - selectBudget(): Prompts the user for an index corresponding to the HouseholdBudget they want to select. 
+*  					Validates the index. Returns the index (int).
+* - selectExpense(): Prompts user for index of Expense they want to modify. 
+* 					 Validate the index. Returns the index (int).
+* 
+* The driver has boilerplate code for generating funds, expenses, and budgets.
+* 
+* The Driver has 10 different commands whose codes correspond to the numbers below:
+* 1. Displays fund and expenses of every HouseholdBudget
+* 2. Displays the fund and expenses of a specific HousholdBudget
+* 3. Displays the pairs of HouseholdBudgets with the same total fund value ($). No Duplicates
+* 4. Displays the pairs of HouseholdBudgets with the same fund distribution. No Duplicates
+* 5. Displays all HouseholdBudgets with the same total fund values and number of expenses. No duplicates
+* 6. Add user specified expense to an existing HouseholdBudget
+* 7. Remove a specific expense (at a certain index) from a specified HouseholdBudget
+* 8. Update the due date of an expense in a specified HouseholdBudget
+* 9. Add specified fund types to a HouseholdBudget's fund
+* 0. Terminates the program
 */
 
 import java.util.Scanner;
@@ -129,7 +151,7 @@ public class BudgetDemo {
 		}
 		return index;
 	}
-	
+
 	
 	public static void main(String[] args) {
 		// --Generate Boilerplate Budgets-- //
@@ -147,18 +169,33 @@ public class BudgetDemo {
 		Expense expenses2[] = {expense1, expense2, expense3};
 		
 		// Budgets
-		HouseholdBudget budget1 = new HouseholdBudget(fund1, expenses1);	// Identical to budget2
-		HouseholdBudget budget2 = new HouseholdBudget(fund1, expenses1);	// Identical to budget1
+		HouseholdBudget budget0 = new HouseholdBudget(fund1, expenses1);	// Identical to budget1
+		HouseholdBudget budget1 = new HouseholdBudget(fund1, expenses1);	// Identical to budget0
 		
-		HouseholdBudget budget3 = new HouseholdBudget(sameTotalAs1, expenses2);	// Same total fund value of budget1 and budget2, 3 expenses
+		HouseholdBudget budget2 = new HouseholdBudget(sameTotalAs1, expenses2);	// Same total fund value of budget0 and budget1, 3 expenses
 		
-		HouseholdBudget budget4 = new HouseholdBudget(fund2,none);	// Same fund and expense count as budget5
-		HouseholdBudget budget5 = new HouseholdBudget(fund2,none);	// Same fund and expense count as budget4
+		HouseholdBudget budget3 = new HouseholdBudget(fund2,none);	// Same fund and expense count as budget4
+		HouseholdBudget budget4 = new HouseholdBudget(fund2,none);	// Same fund and expense count as budget3
 		
 		// --Main-- //
 		// Variables
-		int code;	// Code that determines action to take
-		HouseholdBudget budgetList[] = {budget1, budget2, budget3, budget4, budget5};	// Array of HouseholdBudgets
+		int code;			// Code that determines action to take
+		int budgetIndex;	// Index of specific budget
+		int expenseIndex;	// Index of specific expense
+		HouseholdBudget budgetList[] = {budget0, budget1, budget2, budget3, budget4};	// Array of HouseholdBudgets
+		
+		String type;		// Type of expense
+		double amount;		// Amount ($) of expense
+		String name;		// Name of expense
+		String dueDate;		// Due date of expense
+		
+		int loonies;		// Number of loonies
+		int toonies;		// Number of toonies
+		int bill_5;			// Number of bill_5
+		int bill_10;		// Number of bill_10
+		int bill_20;		// Number of bill_20
+		
+		Scanner in = new Scanner(System.in);	// Initialize a scanner
 		
 		// Welcome User
 		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n"
@@ -169,7 +206,7 @@ public class BudgetDemo {
 		
 		do {
 			showOptions();			// Prints the option list to the console
-			code = promptUser();	// Prompt the user for a code
+			code = promptUser();	// Prompt the user to enter a code
 			
 			
 			// Evaluate the code that was inputed
@@ -180,7 +217,7 @@ public class BudgetDemo {
 					// Check to see if there are any budgets
 					if (budgetExists(budgetList)) {
 						System.out.println("Content of each HouseholdBudget:\n"
-								+ "--------------------");
+										 + "--------------------");
 						
 						// Display HouseholdBudgets
 						for (int i=0; i<budgetList.length; i++) {
@@ -192,7 +229,178 @@ public class BudgetDemo {
 					}
 					
 					break;
+
+				// ---Display the fund and expenses of a specific HousholdBudget---
+				case 2:
+					// Prompt user to choose a specific budget
+					budgetIndex = selectBudget(budgetList, "Which HouseholdBudget do you want to see the possessions of?");
+					
+					// Display budget
+					System.out.println(budgetList[budgetIndex].toString() + "\n");
+					break;
+					
+					
+				// ---Displays the pairs of HouseholdBudgets with the same total fund value ($). No Duplicates---
+				case 3:
+					System.out.println("List of HouseholdBudgets with the same total fund:\n");
+					
+					/* Compare budgets to find the pairs. We only need to compare the permutations
+					 * of the budgetList because we don't want any duplicates.
+					 */
+					
+					// Loop over every budget in the list except for the last one.
+					for (int i=0; i<budgetList.length - 1; i++) {
+						// Loop over all other budgets starting from the current budget (i) + 1
+						for (int j=i+1; j<budgetList.length; j++) {
+							// Compare the fund values
+							if (HouseholdBudget.equalFunds(budgetList[i], budgetList[j])) {
+								System.out.printf("\tHouseholdBudget %d and %d both have %d$\n", i, j, budgetList[i].totalFundValue());
+							}							
+						}
+					}
+					System.out.println();
+					break;
 				
+					
+				// ---Displays the pairs of HouseholdBudgets with the same fund distribution. No Duplicates---
+				case 4:
+					System.out.println("List of HouseholdBudgets with the same Fund:\n");
+					
+					/* Compare budgets to find the pairs. We only need to compare the permutations
+					 * of the budgetList because we don't want any duplicates.
+					 */
+					
+					// Loop over every budget in the list except for the last one.
+					for (int i=0; i<budgetList.length - 1; i++) {
+						// Loop over all other budgets starting from the current budget (i) + 1
+						for (int j=i+1; j<budgetList.length; j++) {
+							// Compare the fund denominations
+							if (HouseholdBudget.equalFundType(budgetList[i], budgetList[j])) {
+								System.out.printf("\tHouseholdBudget %d and %d both have %s\n", i, j, budgetList[i].getFund());
+							}							
+						}
+					}
+					System.out.println();
+					break;
+					
+					
+				// ---Displays all HouseholdBudgets with the same total fund values and number of expenses. No duplicates---
+				case 5:
+					System.out.println("List of HouseholdBudgets with the same amount of money and same number of expenses:\n");
+					
+					/* Compare budgets to find the pairs. We only need to compare the permutations
+					 * of the budgetList because we don't want any duplicates.
+					 */
+					
+					// Loop over every budget in the list except for the last one.
+					for (int i=0; i<budgetList.length - 1; i++) {
+						// Loop over all other budgets starting from the current budget (i) + 1
+						for (int j=i+1; j<budgetList.length; j++) {
+							// Compare the fund values and number of expenses
+							if (HouseholdBudget.equals(budgetList[i], budgetList[j])) {
+								System.out.printf("\tHouseholdBudget %d and %d\n", i, j);
+							}							
+						}
+					}
+					System.out.println();
+					break;
+				
+					
+				// ---Add user specified expense to an existing HouseholdBudget---
+				case 6:
+					// Prompt user for budget index
+					budgetIndex = selectBudget(budgetList, "Which HouseholdBudget do you want to add an Expense to?");
+					
+					// --Prompt user for expense data-- //
+					System.out.println("Please enter the following information so that we may complete the expense:");
+
+					
+					// Expense type
+					System.out.print(" --> Type of expense (Bill, Purchase, etc...): ");
+					type = in.nextLine();
+					// Expense amount
+					System.out.print(" --> Amount of the expense: ");
+					amount = in.nextDouble();
+					in.nextLine();	// Clear scanner. After nextDouble(), a space character is left in the scanner. We need to remove it
+					// Expense name
+					System.out.print(" --> Name of the buisness: ");
+					name = in.nextLine();
+					// Expense due date
+					System.out.print(" --> Payment due day and month (seperated by a /): ");
+					dueDate = in.nextLine();
+					
+					// Create new expense
+					Expense newExpense = new Expense(type, amount, name, dueDate);
+					
+					// Add expense to selected budget
+					budgetList[budgetIndex].addExpense(newExpense);
+					
+					// Display number of expenses in selected budget
+					System.out.printf("You now have %d expense(s)\n\n", budgetList[budgetIndex].expenseCount());
+					break;
+					
+					
+				// ---Remove a specific expense (at a certain index) from a specified HouseholdBudget---
+				case 7:
+					// Prompt user for budget index
+					budgetIndex = selectBudget(budgetList, "Which HouseholdBudget do you want to remove an expense from?");
+					
+					// Prompt user for expense index
+					expenseIndex = selectExpense(budgetList[budgetIndex], "Select index of expense to remove");
+					
+					// Remove expense
+					if (expenseIndex != -1) {	// -1 is the sentinel value. If it is -1, there are no expenses in the budget
+						budgetList[budgetIndex].removeExpense(expenseIndex);
+						System.out.println("Expense was removed successfully\n");
+					}
+					break;
+				
+					
+				// ---Update the due date of an expense in a specified HouseholdBudget---
+				case 8:
+					// Prompt user for budget index
+					budgetIndex = selectBudget(budgetList, "Which HouseholdBudget do you want to update an expense from?");
+					
+					// Prompt user for expense index
+					expenseIndex = selectExpense(budgetList[budgetIndex], "Which expense do you want to update?");
+					
+					// Verify if there are any expenses in the budget
+					if (expenseIndex != -1) {	// -1 is the sentinel value. If it is -1, there are no expenses in the budget
+						// Prompt user for new due date of expense
+						System.out.print(" --> Enter new payment due day and month (seperated by a /): ");
+						dueDate = in.nextLine();
+						
+						// Update due date
+						budgetList[budgetIndex].updateDueDate(expenseIndex, dueDate);
+						System.out.println("Due Date updated\n");						
+					}
+					break;
+					
+					
+				// ---Add specified fund types to a HouseholdBudget's fund---
+				case 9:
+					// Prompt user for budget index
+					budgetIndex = selectBudget(budgetList, "Which HouseholdBudget do you want to add Fund to?");
+					
+					// Prompt user for funds to add
+					System.out.println("How many loonies, toonies, 5$, 10$, 20$ bills do you want to add?");
+					System.out.print("Enter 5 numbers seperated by a space: ");
+					
+					// Assign values
+					loonies = in.nextInt();
+					toonies = in.nextInt();
+					bill_5 = in.nextInt();
+					bill_10 = in.nextInt();
+					bill_20 = in.nextInt();
+					
+					// Add funds to budget
+					budgetList[budgetIndex].addFund(loonies, toonies, bill_5, bill_10, bill_20);
+					
+					// Display updated total fund value
+					System.out.printf("You now have %d$\n\n", budgetList[budgetIndex].totalFundValue());
+					break;
+					
+					
 				// ---Terminate Program---
 				case 0:
 					// Display termination message

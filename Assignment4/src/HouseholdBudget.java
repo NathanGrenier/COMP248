@@ -139,10 +139,8 @@ public class HouseholdBudget {
 			// Create a temp array called tempExpenses with 1 less element than this.expenses. 
 			Expense tempExpenses[] = new Expense[this.expenseCount() - 1];
 			
-			System.out.println(this.expenseCount());
 			// Copy elements from this.expenses to tempExpenses. Skip over the element with the specified index (it is to be deleted)
 			for (int i=0,k=0; i<this.expenseCount(); i++) {
-				System.out.println(i);
 				if (i != removeIndex) {
 					tempExpenses[k] = new Expense(this.expenses[i]);
 					k++;	// Increment index of tempExpenses which has 1 less element than this.expenses
