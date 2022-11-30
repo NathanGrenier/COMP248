@@ -6,6 +6,7 @@
 *  
 * Purpose: Driver code for HouseholdBudgets.
 * The driver has a few static methods for interacting with the user: 
+* - budgetExists(): Returns true if the reference of the array budgets is not equal to null
 * - showOptions(): Prints the available commands to the console
 * - promptUser(): Prompts the user for a code. Validates the code. Returns the code (int)
 * - selectBudget(): Prompts the user for an index corresponding to the HouseholdBudget they want to select. 
