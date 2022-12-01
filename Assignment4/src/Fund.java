@@ -31,7 +31,7 @@ public class Fund {
 	private int bill_10;
 	private int bill_20;
 	
-	// Static constants for the value of each money type
+	// Static constants for the value of each money type. They are public because they simply represent the value of monetary denominations.
 	public static final int LOONIES_VALUE = 1;
 	public static final int TOONIES_VALUE = 2;
 	public static final int BILL_5_VALUE = 5;
@@ -77,13 +77,13 @@ public class Fund {
 	
 	// Returns an integer corresponding to the total dollar value of funds in a household
 	public int fundTotal() {
-		int sum = (this.loonies * LOONIES_VALUE) + (this.toonies * TOONIES_VALUE) + (this.bill_5 * BILL_5_VALUE) + (this.bill_10 * BILL_10_VALUE) + (this.bill_20 * BILL_20_VALUE);
+		int sum = (this.loonies * Fund.LOONIES_VALUE) + (this.toonies * Fund.TOONIES_VALUE) + (this.bill_5 * Fund.BILL_5_VALUE) + (this.bill_10 * Fund.BILL_10_VALUE) + (this.bill_20 * Fund.BILL_20_VALUE);
 		return sum;
 	}
 	
 	// Returns a string with the count of each fund type in the household
 	public String toString() {
-		return "(" + this.loonies + " x $" + LOONIES_VALUE +") + (" + this.toonies + " x $" + TOONIES_VALUE +") + (" + this.bill_5 + " x $" + BILL_5_VALUE +") + (" + this.bill_10 + " x $" + BILL_10_VALUE +") + (" + this.bill_20 + " x $" + BILL_20_VALUE +")";
+		return "(" + this.loonies + " x $" + Fund.LOONIES_VALUE +") + (" + this.toonies + " x $" + Fund.TOONIES_VALUE +") + (" + this.bill_5 + " x $" + Fund.BILL_5_VALUE +") + (" + this.bill_10 + " x $" + Fund.BILL_10_VALUE +") + (" + this.bill_20 + " x $" + Fund.BILL_20_VALUE +")";
 	}
 	
 	// Returns true if 2 households have the same amount of each fund type
