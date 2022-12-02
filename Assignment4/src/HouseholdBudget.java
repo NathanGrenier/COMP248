@@ -113,13 +113,12 @@ public class HouseholdBudget {
 			for (int i=0; i<this.expenseCount(); i++) {
 				// Copy values from current this.expense to tempExpenses at index i
 				tempExpenses[i] = new Expense(this.expenses[i]);
-				
-				// Add the Expense argument expense to tempExpenses
-				tempExpenses[tempExpenses.length - 1] = new Expense(expense);
-				
 			}
+			// Add the Expense argument expense to tempExpenses
+			tempExpenses[tempExpenses.length - 1] = new Expense(expense);
+			
 			// Copy tempExpress into this.expenses (element has been added)
-			this.expenses = tempExpenses;
+			this.expenses = tempExpenses.clone();
 		
 		} else {
 			// this.expenses is null. Create an array of size 1 and add the Expense argument expense
@@ -147,7 +146,7 @@ public class HouseholdBudget {
 				}
 			}
 			// Copy tempExpenses into this.expenses (element at specified index has been removed)
-			this.expenses = tempExpenses;
+			this.expenses = tempExpenses.clone();
 			
 			// Check to see if there are any elements in this.expenses. If not, set the value of this.expenses to null
 			if (this.expenseCount() == 0) {
